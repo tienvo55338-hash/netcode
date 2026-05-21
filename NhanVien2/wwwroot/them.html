@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý Nhân viên</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light d-flex align-items-center" style="height: 100vh;">
+    <div class="card mx-auto shadow p-4" style="width: 400px;">
+        <h4 class="text-center text-success mb-3">THÊM MỚI</h4>
+        <input id="m" class="form-control mb-2" placeholder="Mã nhân viên">
+        <input id="t" class="form-control mb-3" placeholder="Họ và tên">
+        <button class="btn btn-success w-100" onclick="save()">Lưu nhân viên</button>
+        <a href="index.html" class="d-block text-center mt-3 text-decoration-none text-muted small">Quay lại</a>
+    </div>
+
+    <script>
+        function save() {
+            const data = { 
+                manv: document.getElementById('m').value, 
+                hoten: document.getElementById('t').value 
+            };
+            
+            fetch('/api/nhanvien', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(r => r.ok ? location.href = "index.html" : alert("Lỗi!"));
+        }
+    </script>
+</body>
+</html>
